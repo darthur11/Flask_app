@@ -1,0 +1,168 @@
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }}</title>
+      {% else %}
+      <title>Welcome to Algosite</title>
+      {% endif %}
+
+
+
+    	<link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
+      <style>
+      a {
+        color: #0088cc;
+        text-decoration: none;
+      }
+
+      table.main_table {
+        border-spacing:0px;
+      }
+      tbody.config td {
+        display: table-cell;
+        padding: 8px;
+        min-width:275px;
+        border: 1px solid #dddddd;
+        border-spacing: 0px;
+        background-color: #f9f9f9;
+      }
+      .builder {
+        color: silver;
+      }
+
+      .submit_button {
+        border: 1px solid #cccccc;
+        color: #333333;
+        padding: 4px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-border-radius: 4px;
+        -moz-border-radius: 4px;
+        border-radius: 4px;
+      }
+
+      .buy {
+        color: green;
+      }
+
+      .sell {
+        color: red;
+      }
+
+      .y5_check {
+        outline: 1px solid red !important;
+      }
+      .y10_check {
+        outline: 1px solid green !important;
+      }
+      .y15_check {
+        outline: 1px solid blue !important;
+      }
+      .y20_check {
+        outline: 1px solid yellow !important;
+      }
+
+      </style>
+    </head>
+    <body>
+        <div>Main page: <a href="/">Home</a></div>
+        <hr>
+        <h2>Algo financial data</h2>
+
+        <form method=post action="/fin_data">
+              <table valign = 'top' class = "main_table">
+                <thead class="builder">
+                  <tr>
+                    <th>Definition</th>
+                    <th>Periods</th>
+                    <th>Chart	Combinations</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody class = "config">
+                  <tr>
+                    <td>Ticker:
+                        <select id="ticker" name = "ticker">
+                          <option value="ES=F">S&P Futures</option>
+                          <option value="YM=F">Dow Futures</option>
+                          <option value="NQ=F">Nasdaq Futures</option>
+                          <option value="RTY=F">Russell 2000 Futures</option>
+                          <option value="ZB=F">U.S. Treasury Bond Futures,Jun-</option>
+                          <option value="ZN=F">10-Year T-Note Futures,Jun-2020</option>
+                          <option value="ZF=F">Five-Year US Treasury Note Futu</option>
+                          <option value="ZT=F">2-Year T-Note Futures,Jun-2020</option>
+                          <option value="GC=F">Gold</option>
+                          <option value="ZG=F">Gold 100 oz. Apr 20</option>
+                          <option value="SI=F">Silver</option>
+                          <option value="ZI=F">Silver 5000 oz. May 20</option>
+                          <option value="PL=F">Platinum Jul 20</option>
+                          <option value="HG=F">Copper Jul 20</option>
+                          <option value="PA=F">Palladium Sep 20</option>
+                          <option value="CL=F">Crude Oil</option>
+                          <option value="HO=F">Heating Oil Jun 20</option>
+                          <option value="NG=F">Natural Gas Jun 20</option>
+                          <option value="RB=F">RBOB Gasoline Jun 20</option>
+                          <option value="BZ=F">Brent Crude Oil Last Day Financ</option>
+                          <option value="B0=F">Mont Belvieu LDH Propane (OPIS)</option>
+                          <option value="C=F">Corn Jul 20</option>
+                          <option value="O=F">Oats Jul 20</option>
+                          <option value="KW=F">KC HRW Wheat Futures,Jul-2020,C</option>
+                          <option value="RR=F">Rough Rice Jul 20</option>
+                          <option value="SM=F">Soybean Meal Jul 20</option>
+                          <option value="BO=F">Soybean Oil Jul 20</option>
+                          <option value="S=F">Soybeans Jul 20</option>
+                          <option value="FC=F">Feeder Cattle Aug 20</option>
+                          <option value="LH=F">Lean Hogs Jun 20</option>
+                          <option value="LC=F">Live Cattle Jun 20</option>
+                          <option value="CC=F">Cocoa Jul 20</option>
+                          <option value="KC=F">Coffee Jul 20</option>
+                          <option value="CT=F">Cotton Jul 20</option>
+                          <option value="LB=F">Lumber Jul 20</option>
+                          <option value="OJ=F">Orange Juice Jul 20</option>
+                          <option value="SB=F">Sugar #11 Jul 20</option>
+                        </select><br>
+                          Period:
+                          <select id="period" name = "period">
+                            <option value="3">3 Months</option>
+                            <option value="6">6 Months</option>
+                            <option value="9">9 Months</option>
+                            <option value="12">1 Year</option>
+                            <option value="24">2 Years</option>
+                          </select>
+                      </td>
+                      <td>Enter: <input type="date" id="enter_dt" name="enter_dt" /><br>
+                      Exit: <input type="date" id="exit_dt" name="exit_dt" /><br>
+                       <input type="radio" id="buy" name="direction" value="buy"><label for="buy" class="buy">Buy</label>
+                       <input type="radio" id="sell" name="direction" value="sell"><label for="sell" class="sell">Sell</label>
+                      </td>
+                      <td>
+                        <input type="checkbox" id="y5" name="y5" value=1 class="y5_check" checked>
+                        <label for="vehicle1"> 5 years</label>
+                        <input type="checkbox" id="y10" name="y10" value=1 class="y10_check" checked>
+                        <label for="vehicle2"> 10 years</label><br>
+                        <input type="checkbox" id="y15" name="y15" value=1 class="y15_check">
+                        <label for="vehicle3"> 15 years</label>
+                        <input type="checkbox" id="y20" name="y20" value=1 class="y20_check">
+                        <label for="vehicle3"> 20 years</label>
+                      </td>
+                      <td>
+                        <input type="checkbox" id="y5" name="interactive" value=1>
+                        <label for="vehicle1"> Is interactive?</label><br>
+                        <input type=submit value="update graph" class="submit_button">
+                      </td>
+                  </tr>
+                </tbody>
+              </table>
+
+          </form>
+          <hr>
+        {% block content %}{% endblock %}
+
+
+
+    </body>
+</html>
