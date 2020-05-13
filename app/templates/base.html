@@ -9,12 +9,17 @@
 
 
     	<link rel="stylesheet" href="{{url_for('static', filename = 'css/style.css')}}">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet">
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet">
+
       <style>
+      .radio_Buy  {color: green}
+      .radio_Sell {color: red}
       a {
         color: #0088cc;
         text-decoration: none;
       }
-
       table.main_table {
         border-spacing:0px;
       }
@@ -30,42 +35,6 @@
         color: silver;
       }
 
-      .submit_button {
-        border: 1px solid #cccccc;
-        color: #333333;
-        padding: 4px 12px;
-        margin-bottom: 0;
-        font-size: 14px;
-        line-height: 20px;
-        text-align: center;
-        vertical-align: middle;
-        cursor: pointer;
-        -webkit-border-radius: 4px;
-        -moz-border-radius: 4px;
-        border-radius: 4px;
-      }
-
-      .buy {
-        color: green;
-      }
-
-      .sell {
-        color: red;
-      }
-
-      .y5_check {
-        outline: 1px solid red !important;
-      }
-      .y10_check {
-        outline: 1px solid green !important;
-      }
-      .y15_check {
-        outline: 1px solid blue !important;
-      }
-      .y20_check {
-        outline: 1px solid yellow !important;
-      }
-
       </style>
     </head>
     <body>
@@ -73,8 +42,11 @@
         <hr>
         <h2>Algo financial data</h2>
 
-        <form method=post action="/fin_data">
-              <table valign = 'top' class = "main_table">
+
+        <form action="{{ url_for('plot_chart') }}" method="post">
+
+              {{ form.hidden_tag() }}
+              <table class = "main_table">
                 <thead class="builder">
                   <tr>
                     <th>Definition</th>
@@ -85,80 +57,91 @@
                 </thead>
                 <tbody class = "config">
                   <tr>
-                    <td>Ticker:
-                        <select id="ticker" name = "ticker">
-                          <option value="ES=F">S&P Futures</option>
-                          <option value="YM=F">Dow Futures</option>
-                          <option value="NQ=F">Nasdaq Futures</option>
-                          <option value="RTY=F">Russell 2000 Futures</option>
-                          <option value="ZB=F">U.S. Treasury Bond Futures,Jun-</option>
-                          <option value="ZN=F">10-Year T-Note Futures,Jun-2020</option>
-                          <option value="ZF=F">Five-Year US Treasury Note Futu</option>
-                          <option value="ZT=F">2-Year T-Note Futures,Jun-2020</option>
-                          <option value="GC=F">Gold</option>
-                          <option value="ZG=F">Gold 100 oz. Apr 20</option>
-                          <option value="SI=F">Silver</option>
-                          <option value="ZI=F">Silver 5000 oz. May 20</option>
-                          <option value="PL=F">Platinum Jul 20</option>
-                          <option value="HG=F">Copper Jul 20</option>
-                          <option value="PA=F">Palladium Sep 20</option>
-                          <option value="CL=F">Crude Oil</option>
-                          <option value="HO=F">Heating Oil Jun 20</option>
-                          <option value="NG=F">Natural Gas Jun 20</option>
-                          <option value="RB=F">RBOB Gasoline Jun 20</option>
-                          <option value="BZ=F">Brent Crude Oil Last Day Financ</option>
-                          <option value="B0=F">Mont Belvieu LDH Propane (OPIS)</option>
-                          <option value="C=F">Corn Jul 20</option>
-                          <option value="O=F">Oats Jul 20</option>
-                          <option value="KW=F">KC HRW Wheat Futures,Jul-2020,C</option>
-                          <option value="RR=F">Rough Rice Jul 20</option>
-                          <option value="SM=F">Soybean Meal Jul 20</option>
-                          <option value="BO=F">Soybean Oil Jul 20</option>
-                          <option value="S=F">Soybeans Jul 20</option>
-                          <option value="FC=F">Feeder Cattle Aug 20</option>
-                          <option value="LH=F">Lean Hogs Jun 20</option>
-                          <option value="LC=F">Live Cattle Jun 20</option>
-                          <option value="CC=F">Cocoa Jul 20</option>
-                          <option value="KC=F">Coffee Jul 20</option>
-                          <option value="CT=F">Cotton Jul 20</option>
-                          <option value="LB=F">Lumber Jul 20</option>
-                          <option value="OJ=F">Orange Juice Jul 20</option>
-                          <option value="SB=F">Sugar #11 Jul 20</option>
-                        </select><br>
-                          Period:
-                          <select id="period" name = "period">
-                            <option value="3">3 Months</option>
-                            <option value="6">6 Months</option>
-                            <option value="9">9 Months</option>
-                            <option value="12">1 Year</option>
-                            <option value="24">2 Years</option>
-                          </select>
-                      </td>
-                      <td>Enter: <input type="date" id="enter_dt" name="enter_dt" /><br>
-                      Exit: <input type="date" id="exit_dt" name="exit_dt" /><br>
-                       <input type="radio" id="buy" name="direction" value="buy"><label for="buy" class="buy">Buy</label>
-                       <input type="radio" id="sell" name="direction" value="sell"><label for="sell" class="sell">Sell</label>
-                      </td>
-                      <td>
-                        <input type="checkbox" id="y5" name="y5" value=1 class="y5_check" checked>
-                        <label for="vehicle1"> 5 years</label>
-                        <input type="checkbox" id="y10" name="y10" value=1 class="y10_check" checked>
-                        <label for="vehicle2"> 10 years</label><br>
-                        <input type="checkbox" id="y15" name="y15" value=1 class="y15_check">
-                        <label for="vehicle3"> 15 years</label>
-                        <input type="checkbox" id="y20" name="y20" value=1 class="y20_check">
-                        <label for="vehicle3"> 20 years</label>
-                      </td>
-                      <td>
-                        <input type="checkbox" id="y5" name="interactive" value=1>
-                        <label for="vehicle1"> Is interactive?</label><br>
-                        <input type=submit value="update graph" class="submit_button">
-                      </td>
-                  </tr>
-                </tbody>
-              </table>
+                    <td>
+              <div class="form-group">
+                  {{ form.multi_select.label }}
+                  <small class="text-muted">{{ form.multi_select.description }}</small>
+                  {{ form.multi_select(class_="form-control") }}
 
+                  {% for error in form.multi_select.errors %}
+                  <span class="label label-danger">{{ error }}</span>
+                  {% endfor %}
+              </div>
+
+
+              <div class="form-group">
+                  {{ form.single_select.label }}
+                  <small class="text-muted">{{ form.single_select.description }}</small>
+                  {{ form.single_select(class_="form-control") }}
+
+                  {% for error in form.single_select.errors %}
+                  <span class="label label-danger">{{ error }}</span>
+                  {% endfor %}
+              </div>
+            </td><td>
+              <div class="form-group">
+                {{ form.startdate.label }}
+                   {{ form.startdate }}<br>
+                {{ form.enddate.label }}
+                   {{ form.enddate }}<br>
+
+                 {% for subfield in form.radio %}
+                     {{ subfield }}
+                     {{ subfield.label(class="radio_" ~ subfield.label.text) }}
+                 {% endfor %}
+
+              </div>
+            </td><td>
+              <div class="form-group">
+                {{ form.y5 }}{{ form.y5.label }}<br>
+                {{ form.y10 }}{{ form.y10.label }}<br>
+                {{ form.y15 }}{{ form.y15.label }}<br>
+                {{ form.y20 }}{{ form.y20.label }}<br>
+              </div>
+
+            </td><td>
+              {{ form.interactive }}{{ form.interactive.label }}<br>
+              {{ form.submit(class_="btn btn-primary") }}
+            </td></tr></tbody></table>
           </form>
+
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+          <script type="text/javascript">
+          $(document).ready(function() {
+              // https://select2.github.io/examples.html
+              $("select").select2({width: '300px' });
+
+              function formatRepo (repo) {
+                  if (repo.loading) return repo.text;
+
+                  var markup = "<div class='select2-result-repository clearfix'>" +
+                  "<div class='select2-result-repository__avatar'><img src='" + repo.owner.avatar_url + "' /></div>" +
+                  "<div class='select2-result-repository__meta'>" +
+                  "<div class='select2-result-repository__title'>" + repo.full_name + "</div>";
+
+                  if (repo.description) {
+                      markup += "<div class='select2-result-repository__description'>" + repo.description + "</div>";
+                  }
+
+                  markup += "<div class='select2-result-repository__statistics'>" +
+                  "<div class='select2-result-repository__forks'><i class='fa fa-flash'></i> " + repo.forks_count + " Forks</div>" +
+                  "<div class='select2-result-repository__stargazers'><i class='fa fa-star'></i> " + repo.stargazers_count + " Stars</div>" +
+                  "<div class='select2-result-repository__watchers'><i class='fa fa-eye'></i> " + repo.watchers_count + " Watchers</div>" +
+                  "</div>" +
+                  "</div></div>";
+
+                  return markup;
+              }
+
+              function formatRepoSelection (repo) {
+                  return repo.full_name || repo.text;
+              }
+
+          });
+          </script>
           <hr>
         {% block content %}{% endblock %}
 

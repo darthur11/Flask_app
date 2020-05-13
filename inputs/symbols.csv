@@ -1,0 +1,81 @@
+EXCHANGE,SYMBOL,NAME
+CBOE,VX,CBOE VIX Futures
+CME,TY,CBOT 10-year US Treasury Note
+CME,TU,CBOT 2-year US Treasury Note
+CME,FF,CBOT 30-day Federal Funds
+CME,US,CBOT 30-year US Treasury Bond
+CME,FV,CBOT 5-year US Treasury Note
+CME,C,CBOT Corn
+CME,DJ,CBOT Dow Jones Ind Avg (DJIA)
+CME,O,CBOT Oats
+CME,RR,CBOT Rough Rice
+CME,SM,CBOT Soybean Meal
+CME,BO,CBOT Soybean Oil
+CME,S,CBOT Soybeans
+CME,W,CBOT Wheat
+CME,AD,CME Australian Dollar AUD
+CME,BP,CME British Pound GBP
+CME,CD,CME Canadian Dollar CAD
+CME,DA,CME Class III Milk
+CME,YM,CME E-mini Dow Jones
+CME,EC,CME Euro FX
+CME,ED,CME Eurodollar
+CME,JY,CME Japanese Yen JPY
+CME,KW,CME Kansas City Wheat
+CME,LN,CME Lean Hogs
+CME,LC,CME Live Cattle
+CME,MP,CME Mexican Peso
+CME,NQ,CME NASDAQ 100 Index Mini
+CME,NE,CME New Zealand Dollar NZD
+CME,NK,CME Nikkei 225
+CME,LB,CME Random Length Lumber
+CME,MD,CME S&P 400 Midcap Index
+CME,SP,CME S&P 500 Index
+CME,ES,CME S&P 500 Index E-Mini
+CME,SF,CME Swiss Franc CHF
+CME,HG,COMEX Copper
+CME,RS1,CME Russell 1000 Index Mini Futures
+CME,RTY,CME Russell 2000 Index Mini Futures
+EUREX,FDAX,EUREX DAX
+EUREX,FESX,EUREX EURO STOXX 50 Index
+EUREX,FBTP,EUREX Euro-BTP
+EUREX,FGBM,EUREX Euro-Bobl
+EUREX,FGBL,EUREX Euro-Bund
+EUREX,FOAT,EUREX Euro-OAT
+EUREX,FGBS,EUREX Euro-Schatz
+ICE,B,ICE Brent Crude Oil
+ICE,MP,ICE British Pound GBP
+ICE,CC,ICE Cocoa
+ICE,KC,ICE Coffee C
+ICE,CT,ICE Cotton
+ICE,G,ICE Gasoil
+ICE,O,ICE Heating Oil
+ICE,OJ,ICE Orange Juice
+ICE,ATW,ICE Rotterdam Coal
+ICE,RF,ICE Russell 1000 Index Mini
+ICE,TF,ICE Russell 2000 Index Mini
+ICE,SB,ICE Sugar No. 11
+ICE,M,ICE UK Natural Gas
+ICE,DX,ICE US Dollar Index
+ICE,T,ICE WTI Crude Oil
+LIFFE,I,LIFFE EURIBOR
+LIFFE,Z,LIFFE FTSE 100 Index
+LIFFE,C,LIFFE London Cocoa
+LIFFE,R,LIFFE Long Gilt
+LIFFE,L,LIFFE Short Sterling
+MGEX,MW,MGEX Hard Red Spring Wheat
+MX,SXF,MX Montreal S&P/TSX 60 Index
+CME,RB,NYMEX Gasoline
+CME,GC,NYMEX Gold
+CME,HO,NYMEX Heating Oil
+CME,NG,NYMEX Natural Gas
+CME,PA,NYMEX Palladium
+CME,PL,NYMEX Platinum
+CME,SI,NYMEX Silver
+CME,CL,NYMEX WTI Crude Oil
+SHFE,AL,SHFE Aluminium
+SHFE,CU,SHFE Copper
+SHFE,PB,SHFE Lead
+SHFE,RU,SHFE Natural Rubber
+SHFE,RB,SHFE Rebar
+SHFE,ZN,SHFE Zinc

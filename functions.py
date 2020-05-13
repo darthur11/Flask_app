@@ -13,12 +13,17 @@ import base64
 
 plt.switch_backend('Agg')
 
-def get_data(ticker):
-    hist = yf.Ticker(ticker).history(period='max')
-    if len(hist)>0:
-        last = float(hist['Close'].iloc[-1])
-    else:
-        last = 0
+def get_data(tickers):
+    hist = []
+    last = []
+    for i, ticker in enumerate(tickers):
+        hist_tmp = yf.Ticker(ticker).history(period='max')
+        if len(hist_tmp)>0:
+            last_tmp = float(hist_tmp['Close'].iloc[-1])
+        else:
+            last_tmp = 0
+        hist.append(hist_tmp)
+        last.append(last_tmp)
     return last, hist
 
 def fin_plot(hists, ticker, coords, legend_vals):
@@ -121,13 +126,13 @@ def legends(last, direction, enter_dt, exit_dt, y5, y10, y15, y20):
     fin_lst = [{'key':'BUY', 'label':buy, 'color':'green'},
                {'key':'SELL', 'label':sell, 'color':'red'},
                {'key':'LAST', 'label':last, 'color':'blue'}]
-    if(y5==1):
+    if(y5):
         fin_lst.append({'key':'5 Years', 'label':'', 'color':'red'})
-    if(y10==1):
+    if(y10):
         fin_lst.append({'key':'10 Years', 'label':'', 'color':'green'})
-    if(y15==1):
+    if(y15):
         fin_lst.append({'key':'15 Years', 'label':'', 'color':'blue'})
-    if(y20==1):
+    if(y20):
         fin_lst.append({'key':'20 Years', 'label':'', 'color':'yellow'})
     return fin_lst
 
